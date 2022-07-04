@@ -24,7 +24,6 @@ bodyParser.urlencoded({
 app.use(morgan("combined",{ stream: winston.stream}))
 
 //routes
-
 app.use(cookieParser());
 
 
