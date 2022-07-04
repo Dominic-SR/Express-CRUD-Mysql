@@ -1,10 +1,32 @@
 import express from 'express';
+import morgan from "morgan";
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import * as dotenv from "dotenv"
 dotenv.config();
 
 const port = process.env.PORT;
 
 var app = express();
+
+//body parser
+app.use(bodyParser.json({ limit:"10mb"}));
+
+app.use(
+bodyParser.urlencoded({
+    limit:"10mb",
+    extended:true,
+    parameterLimit: 50000,
+})
+);
+
+//morgon combined log
+app.use(morgan("combined",{ stream: winston.stream}))
+
+//routes
+
+app.use(cookieParser());
+
 
 //Port On Error Function
 function onError(error){
